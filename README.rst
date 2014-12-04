@@ -25,8 +25,11 @@ Is a Sable bundle just a computer program?
 There is a fairly strong analogy as follows:
 
 Python : Ruby : Sable
+
 package : gem : bundle
+
 module : file : document
+
 function : function : paragraph
 
 What does Sableman do?
