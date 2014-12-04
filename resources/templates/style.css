@@ -1,0 +1,209 @@
+html,body { margin:0; padding: 0 }
+body {
+  background-color: #fff;
+  font-family: Georgia, Times, serif;
+  font-size: 20px;
+}
+
+.wrapper {}
+
+/***/
+  .context {
+    margin: 0 0 20px;
+    padding: 5px;
+    border-bottom: 1px dotted #ccc;
+    text-align: center;
+    font-size: 16px;
+    font-style: italic;
+    color: #555;
+  }
+    .context h1 {
+      font-size: inherit;
+      font-weight: normal;
+      margin: 0;
+    }
+      .context h1 a,
+      .context h1 a:visited {
+        color: inherit;
+      }
+
+/***/
+  .header {
+    margin: 0 0 0 150px;
+    padding: 20px 40px 20px;
+    width: 650px;
+  }
+  .refs_wrapper .header {
+    margin: 0 0 0 200px;
+  }
+    .index_wrapper .header h1 {
+      font-size: 1.5em;
+      font-weight: bold;
+      margin: 50px 0 15px;
+    }
+    .document_wrapper .header h2,
+    .refs_wrapper .header h2 {
+      font-size: 1em;
+      font-weight: bold;
+      margin: 0 0 5px;
+    }
+    .header .description {
+      font-style: italic;
+      line-height: 1.5em;
+      margin: 0 0 30px;
+    }
+    .index_wrapper .header .description {
+      font-size: 1.2em;
+    }
+
+/***/
+  .body {
+    margin: 0 0 0 130px;
+    padding: 0 40px 20px;
+    width: 650px;
+  }
+    .paragraph {
+        display: inline-block;
+        margin: 0 0 30px;
+        padding: 0 0 0 20px;
+        border-left: 2px solid #eee;
+        line-height: 1.5em;
+    }
+      .paragraph-type {
+        display: block;
+        float: left;
+        clear:both;
+        position: absolute;
+        left: 30px;
+        width: 120px;
+        margin: 0 0 1em;
+        text-align: right;
+        font-weight: bold;
+        font-size: inherit;
+        color: #444;
+      }
+        .paragraph-type a,
+        .paragraph-type a:visited {
+          color: inherit;
+          text-decoration: none;
+        }
+        .paragraph-type a:hover {
+          color: #000;
+          border-bottom: 2px solid #000;
+        }
+      .paragraph p {
+          margin: 0 0 1em 0;
+      }
+      .paragraph .statement {
+          display: inline;
+          font-style: italic;
+      }
+      .paragraph .proof {
+          margin: 1em 0;
+      }
+      .paragraph .formula {
+          text-align: center;
+          margin: 20px 0;
+      }
+      .paragraph .inline-formula img {
+          vertical-align: middle;
+      }
+      .paragraph .def {
+          font-style: italic;
+      }
+      .paragraph .citation a,
+      .paragraph .citation a:visited {
+        color: #000;
+        text-decoration: none;
+        border-bottom: 1px solid #ddd;
+      }
+      .paragraph .citation a:hover {
+        color: #000;
+        border-bottom: 1px solid #000;
+      }
+      .paragraph .term a {
+          color: inherit;
+          text-decoration: none;
+          border-bottom: 1px dotted #ccc;
+      }
+
+/***/
+
+  .toc {
+    margin: 0 0 0 150px;
+    padding: 0 40px 20px;
+    width: 650px;
+  }
+    .toc .document {
+      margin: 0 0 5px;
+      line-height: 1.5em;
+      color: #555;
+      font-size: 1.4em;
+    }
+      .toc .document a,
+      .toc .document a:visited {
+        color: inherit;
+        text-decoration: none;
+      }
+      .toc .document a:hover {
+        color: #000;
+      }
+
+/***/
+
+  .bundle_info {
+    margin: 40px 0 0 150px;
+    padding: 0 40px 20px;
+    width: 650px;
+    color: #777;
+  }
+
+  .bundle_info .deps_container {
+    margin: 15px 0;
+    font-size: 0.9em;
+  }
+    .bundle_info .deps_container h4 {
+      margin: 0 0 5px;
+      font-size: 1em;
+      font-weight: bold;
+    }
+    .bundle_info .deps_container .deps .dep {
+      margin: 0 0 5px;
+    }
+      .bundle_info .deps_container .deps .dep a,
+      .bundle_info .deps_container .deps .dep a:visited {
+        color: inherit;
+      }
+      .bundle_info .deps_container .deps .dep a:hover {
+        color: #000;
+      }
+
+/***/
+
+  .references {
+    margin: 0 0 0 180px;
+    padding: 0 40px 20px;
+    width: 650px;
+  }
+    .references .ref {
+        display: inline-block;
+        margin: 0 0 10px;
+        padding: 0 0 0 20px;
+        border-left: 2px solid #eee;
+        line-height: 1.5em;
+    }
+      .references .ref .ref-id {
+        display: block;
+        float: left;
+        clear: both;
+        position: absolute;
+        left: 30px;
+        width: 170px;
+        margin: 0 0 1em;
+        text-align: right;
+        font-size: 0.8em;
+        color: #444;
+      }
+      .references .ref .title {
+        font-style: italic;
+      }
