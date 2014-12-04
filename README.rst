@@ -20,6 +20,15 @@ What is the difference between Sable and LaTeX?
 Sable can be thought of as a semantic version of TeX or LaTeX, that also allows seamless cross-referencing between documents.
 Sable is however not meant as a replacement of LaTeX; the latter is much more flexible and powerful for the purpose of working with individual documents.
 
+Is a Sable bundle just a computer program?
+------------------------------------------
+There is a fairly strong analogy as follows:
+
+Python : Ruby : Sable
+package : gem : bundle
+module : file : document
+function : function : paragraph
+
 What does Sableman do?
 ----------------------
 Sableman helps you work with Sable bundles.
