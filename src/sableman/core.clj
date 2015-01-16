@@ -10,7 +10,8 @@
   (:use [slingshot.slingshot :only [throw+ try+]])
   (:require [sableman.bundle.path :as sabpat]
             [sableman.bundle.meta :as sabmet]
-            [sableman.export.html :as sabexp]))
+            [sableman.export.html :as sabhtml]
+            [sableman.export.tex :as sabtex]))
 
 (defn- install-bundle! [bun-path]
   (let [bun-meta     (sabmet/read-meta bun-path)
@@ -47,10 +48,21 @@
        (let [[bun-path bun-meta] (parse-path-and-meta args)]
          (if (and bun-path (sabpat/is-bundle? bun-path))
            (try+
-            (sabexp/export-bundle-to-html! bun-path)
+            (sabhtml/export-bundle-to-html! bun-path)
             (println "Exported bundle to path:\n" (str (sabpat/get-html-dir bun-meta)))
             (shutdown-agents)
             (catch [:type :sableman.export.html/missing-deps] {:keys [missing-deps]}
+              (println "Error: the following dependencies need to be installed first:\n"
+                       missing-deps)))
+           (println "Error: there is no such bundle installed.")))
+     (= "export-tex" cmd)
+       (let [[bun-path bun-meta] (parse-path-and-meta args)]
+         (if (and bun-path (sabpat/is-bundle? bun-path))
+           (try+
+            (sabtex/export-bundle-to-tex! bun-path)
+            (println "Exported bundle to path:\n" (str (sabpat/get-tex-file bun-path bun-meta)))
+            (shutdown-agents)
+            (catch [:type :sableman.export.tex/missing-deps] {:keys [missing-deps]}
               (println "Error: the following dependencies need to be installed first:\n"
                        missing-deps)))
            (println "Error: there is no such bundle installed.")))

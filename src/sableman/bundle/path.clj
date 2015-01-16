@@ -45,6 +45,11 @@
   (io/file (str html-export-dir "/.formulas")))
 (.mkdir formula-cache-dir)
 
+(def tex-export-dir
+  (io/file (or (System/getenv "SAB_TEX_EXPORT_DIR")
+               (str export-dir "/tex"))))
+(.mkdir tex-export-dir)
+
 ;; bundle-specific
 
 (defn get-metafile [bun-path]
@@ -55,6 +60,15 @@
 
 (defn get-reffile [bun-path]
   (io/file (str bun-path "/" "refs.sbl")))
+
+;;
+
+(defn get-tex-dir [bun-path]
+  (io/file (str bun-path "/tex")))
+
+(defn get-tex-file [bun-path bun-meta]
+  (.mkdir (io/file (get-tex-dir bun-path)))
+  (io/file (str (get-tex-dir bun-path) "/" (bun-meta :name) ".tex")))
 
 ;;
 

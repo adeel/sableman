@@ -1,0 +1,127 @@
+\ProvidesPackage{sable}
+
+\RequirePackage[
+  textheight=0.5\paperheight,
+  textwidth =0.5\paperwidth,
+  top       =0.1\paperheight,
+  bottom    =0.2\paperheight,
+  left      =0.1\paperwidth,
+  right     =0.2\paperwidth]{geometry}
+
+\RequirePackage{setspace}
+\onehalfspacing
+
+%% TITLE; SECTIONS; PARAGRAPHS
+
+\RequirePackage{etoolbox}
+\RequirePackage[explicit]{titlesec}
+\RequirePackage{titletoc}
+
+\newtoggle{akynosections}
+\newtoggle{akynochapters}
+\togglefalse{akynosections}
+\togglefalse{akynochapters}
+
+\titlelabel{\thetitle.\ }
+
+%% headings
+
+% section format
+\renewcommand*{\thesection}{%
+  \iftoggle{akynochapters}{\arabic{section}}{\arabic{chapter}.\arabic{section}}%
+}
+\titleformat{\section}
+{\centering\large\bfseries\uppercase}
+{\S\ \thesection.\ }
+{0em}
+{#1}
+
+% paragraph numbering
+\newcounter{parano}[section]
+%\renewcommand{\theparano}
+%  {\ifdef{\akynosections}{\arabic{parano}}
+%    {\arabic{section}.\arabic{parano}}}
+\renewcommand{\theparano}
+  {\iftoggle{akynosections}{\arabic{parano}}
+    {\iftoggle{akynochapters}{\arabic{section}.\arabic{parano}}
+      {\ifnumequal{\thechapter}{0}
+        {\arabic{parano}}
+        {\arabic{chapter}.\arabic{section}.\arabic{parano}}}}}
+
+\newcommand{\para}[1][]{\refstepcounter{parano}\paragraph{\theparano.}%
+\ifblank{#1}{}{\label{#1}}}
+
+% para with title
+\newcommand{\paratit}[2][]{\refstepcounter{parano}\paragraph{\theparano.}%
+\ifblank{#1}{}{\label{#1}}
+{\bfseries #2}
+}
+
+% paragraph format
+\titleformat{\paragraph}[runin]
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{#1}
+
+% paragraph spacing
+\parindent 1cm
+\parskip 0.2cm
+
+\titlespacing{\paragraph}{%
+%  \parindent}{%              left margin
+  0em}{%      left margin
+  0.3\baselineskip}{% space before (vertical)
+  1em}%               space after (horizontal)
+
+%% table of contents formatting
+
+\titlecontents{section}[1.5em]{}{\S\thecontentslabel.\ }{}{\titlerule*[1pc]{.} \thecontentspage}
+
+%% bibliography
+\usepackage[square,numbers]{natbib}
+\newcommand{\cit}[1]{\defcitealias{#1}{\citeauthor*{#1}}\citetalias{#1} \citep{#1}}
+\newcommand{\citcust}[2]{\defcitealias{#1}{#2}\citetalias{#1} \citep*{#1}}
+
+%% LISTS
+
+\usepackage{enumitem}
+\setlist[itemize]{label=(\roman*),align=left,
+  leftmargin=*,labelindent=\parindent,labelsep=0cm,%
+  topsep=0pt, noitemsep}
+\setlist[enumerate]{label=(\roman*),align=left,
+  leftmargin=*,labelindent=\parindent,labelsep=0cm,%
+  topsep=0pt, noitemsep}
+
+%% DEFINITIONS; CLAIMS
+
+\newenvironment{sabparagraph}%
+{\para}%
+{\ignorespacesafterend}
+
+\newenvironment{sabproposition}[1][]
+{\para\itshape \ifblank{#1}{\textbf{Proposition. ---}}{\textbf{Proposition} (#1)\textbf{. ---}} \normalfont}
+{\ignorespacesafterend}
+
+\newenvironment{sablemma}[1][]
+{\para\itshape \ifblank{#1}{\textbf{Lemma. ---}}{\textbf{Lemma} (#1)\textbf{. ---}} \normalfont}
+{\ignorespacesafterend}
+
+\newenvironment{sabtheorem}[1][]
+{\para\itshape \ifblank{#1}{\textbf{Theorem. ---}}{\textbf{Theorem} (#1)\textbf{. ---}} \normalfont}
+{\ignorespacesafterend}
+
+\newenvironment{sabdefinition}[1][]
+{\para\itshape \ifblank{#1}{\textbf{Definition. ---}}{\textbf{Definition} (#1)\textbf{. ---}} \normalfont}
+{\ignorespacesafterend}
+
+\newenvironment{sabremark}[1][]
+{\para\itshape \ifblank{#1}{\textbf{Remark. ---}}{\textbf{Remark} (#1)\textbf{. ---}} \normalfont}
+{\ignorespacesafterend}
+
+%%
+
+\newenvironment{sabstatement}
+{\itshape }
+{\ignorespacesafterend}
+
+\newenvironment{sabproof}
+{\par\textit{Proof.} ---}
+{\ignorespacesafterend}

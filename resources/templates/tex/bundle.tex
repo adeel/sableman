@@ -1,0 +1,68 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[utf8]{inputenc}
+
+%%
+
+\usepackage{sable}
+\toggletrue{akynochapters}
+
+%%%%%%%
+%% http://zoonek.free.fr/LaTeX/LaTeX_samples_title/0.html
+
+\makeatletter
+\def\thickhrulefill{\leavevmode \leaders \hrule height 1pt\hfill \kern \z@}
+\def\maketitle{%
+  %\null
+  \thispagestyle{empty}%
+  \vskip 1cm
+  %\vfil
+  \begin{center}
+    \Large \strut \@title \par
+  \end{center}
+  \par
+  %\vfil
+  <(when (bun-meta :author) ">
+  \begin{center}
+    \emph{by } \normalfont\@author\par
+    %\ \\ \normalfont\@date\par
+  \end{center}
+  <")>
+  %\vfil
+  %\vfil
+  %\vfil
+  %\null
+  %\cleardoublepage
+  }
+\makeatother
+\author{<(raw (bun-meta :author))>}
+\title{\uppercase{<(raw (bun-meta :title))>}}
+
+<(raw (bun-meta :tex-preamble))>
+
+\begin{document}
+
+\maketitle
+
+<(raw (bun-meta :description))>
+
+<(map (fn [doc] ">
+\section{<(raw (doc :title))>}
+
+<(raw (doc :description))>
+
+<(raw (doc :tex))>
+<") docs)>
+
+\section*{References}
+
+<(when (bun-meta :ext-refs) ">
+\begin{description}[leftmargin=3cm,style=nextline]
+<(map-indexed
+ (fn [idx [ref-id ref]] ">
+\item[<(raw ref-id)>] <(raw (ref :author))>. \emph{<(raw (ref :title))>}.
+<") (bun-meta :ext-refs))>
+\end{description}
+<")>
+
+\end{document}
