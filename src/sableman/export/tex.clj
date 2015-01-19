@@ -50,7 +50,7 @@
        (= :citation (node :type))
          (cond
           (map? (node :ref))
-            (str (get-in node [:ref :doc-index]) "." (get-in node [:ref :par-index]))
+            (str "(" (get-in node [:ref :doc-index]) "." (get-in node [:ref :par-index]) ")")
           (not (string/blank? (node :ext-ref)))
             (string/join
              ""
