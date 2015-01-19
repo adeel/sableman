@@ -112,6 +112,10 @@
 {\para\itshape \ifblank{#1}{\textbf{Definition. ---}}{\textbf{Definition} (#1)\textbf{. ---}} \normalfont}
 {\ignorespacesafterend}
 
+\newenvironment{sabcorollary}[1][]
+{\para\itshape \ifblank{#1}{\textbf{Corollary. ---}}{\textbf{Corollary} (#1)\textbf{. ---}} \normalfont}
+{\ignorespacesafterend}
+
 \newenvironment{sabremark}[1][]
 {\para\itshape \ifblank{#1}{\textbf{Remark. ---}}{\textbf{Remark} (#1)\textbf{. ---}} \normalfont}
 {\ignorespacesafterend}
@@ -124,4 +128,8 @@
 
 \newenvironment{sabproof}
 {\par\textit{Proof.} ---}
+{\ignorespacesafterend}
+
+\newenvironment{sabreference}
+{\par\textit{Reference.} ---}
 {\ignorespacesafterend}
