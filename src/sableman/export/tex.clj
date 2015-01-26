@@ -50,7 +50,19 @@
        (= :citation (node :type))
          (cond
           (map? (node :ref))
-            (str "(" (get-in node [:ref :doc-index]) "." (get-in node [:ref :par-index]) ")")
+            (if (= (get-in node [:ref :bun-name]) (bun-meta :name))
+              (str "(" (get-in node [:ref :doc-index])
+                   "." (get-in node [:ref :par-index]) ")")
+              (str "(" (get-in node [:ref :bun-name])
+                   "/" (get-in node [:ref :doc-index])
+                   "." (get-in node [:ref :par-index]) ")"))
+          (map? (node :formula-ref))
+            (if (= (get-in node [:formula-ref :bun-name]) (bun-meta :name))
+              (str "(" (get-in node [:formula-ref :doc-index])
+                   "." (get-in node [:formula-ref :fml-index]) ")")
+              (str "(" (get-in node [:formula-ref :bun-name])
+                   "/" (get-in node [:formula-ref :doc-index])
+                   "." (get-in node [:formula-ref :fml-index]) ")"))
           (not (string/blank? (node :ext-ref)))
             (string/join
              ""
@@ -63,7 +75,11 @@
                         (str ", " (node :post-note)))
                       ")"])))
        (= :formula (node :type))
-         (str "\\[" content "\\]")
+         (str "\\[" content (if (node :formula-index)
+                              (str "\\tag{" doc-idx
+                                   "." (get node :formula-index 0) "}")
+                              "")
+              "\\]")
        (= :inline-formula (node :type))
          (str "\\(" content "\\)")
        (= :list (node :type))
@@ -116,8 +132,6 @@
 
 ;(export-tex "firstdoc" bun-path)
 
-;(def bun-path "/home/adeel/Dropbox/Math/notes/mtvhtp-sixops")
-;(export-document-to-tex! "dirimgclimm" bun-path)
 ;(export-document-to-tex "mtvspc" bun-path)
 ;(export-bundle-to-tex! "/home/adeel/Dropbox/Math/notes/mtvhtp")
 ;(export-bundle-to-tex! "/home/adeel/Dropbox/Math/notes/presheaves")
