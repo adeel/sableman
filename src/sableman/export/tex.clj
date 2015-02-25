@@ -76,8 +76,9 @@
                       ")"])))
        (= :formula (node :type))
          (str "\\[" content (if (node :formula-index)
-                              (str "\\tag{" doc-idx
-                                   "." (get node :formula-index 0) "}")
+                              (str "\\tag{"
+                                   (if (str doc-idx ".") doc-idx "")
+                                   (get node :formula-index 0) "}")
                               "")
               "\\]")
        (= :inline-formula (node :type))
@@ -100,8 +101,11 @@
         doc-tex    (document-map->tex doc-map doc-idx bun-meta)]
     (assoc doc-map :tex doc-tex)))
 
+(defn export-intro-to-tex [bun-meta]
+  (export-document-to-tex "intro" nil bun-meta))
+
 (def bundle->tex
-  (fleet [bun-meta docs]
+  (fleet [bun-meta intro docs]
     (slurp (io/resource "templates/tex/bundle.tex"))))
 
 (defn export-bundle-to-tex! [bun-path]
@@ -111,11 +115,13 @@
         bun-meta     (bmet/load-ext-refs bun-path bun-meta)
         missing-deps (filter (fn [[k v]] (not (v :path)))
                              (bun-meta :deps-map))
+        intro        (when (bp/intro-exists? bun-path)
+                       (export-intro-to-tex bun-meta))
         docs         (map-indexed
                       (fn [i doc-name]
                         (export-document-to-tex doc-name (inc i) bun-meta))
                       (bun-meta :contents))
-        tex-str      (bundle->tex bun-meta docs)]
+        tex-str      (bundle->tex bun-meta intro docs)]
     (if (seq missing-deps)
       (throw+ {:type ::missing-deps
                :missing-deps missing-deps}))

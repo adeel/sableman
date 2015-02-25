@@ -116,6 +116,9 @@
   [doc-name bun-path]
   (.exists (get-doc-file doc-name bun-path)))
 
+(defn intro-exists? [bun-path]
+  (document-exists? "intro" bun-path))
+
 ;; installed bundles repository
 
 (defn get-bundle-metastr [bun-meta]

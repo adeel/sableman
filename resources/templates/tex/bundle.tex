@@ -44,7 +44,14 @@
 
 \maketitle
 
+\paragraph{Abstract.}
 <(raw (bun-meta :description))>
+
+\section*{<(raw (intro :title))>}
+
+<(raw (intro :description))>
+
+<(raw (intro :tex))>
 
 <(map (fn [doc] ">
 \section{<(raw (doc :title))>}
