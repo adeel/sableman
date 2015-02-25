@@ -27,4 +27,6 @@
     :def
     :f
     :list
-    :text})
+    :text
+    :i
+    :b})

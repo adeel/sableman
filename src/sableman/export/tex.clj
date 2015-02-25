@@ -87,6 +87,10 @@
          (list-node->tex (node :list-type) content)
        (= :item (node :type))
          (item-node->tex node-class content)
+       (= :italics (node :type))
+         (str "{\\itshape " content "}")
+       (= :bold (node :type))
+         (str "{\\bfseries " content "}")
        (contains? tagdef/inline-tags (node :type))
          content))))
 

@@ -133,6 +133,14 @@
   {:type    :list-item
    :content (get-node-content node-el context)})
 
+(defn italics-node->map [node-el context]
+  {:type    :italics
+   :content (get-node-content node-el context)})
+
+(defn bold-node->map [node-el context]
+  {:type    :bold
+   :content (get-node-content node-el context)})
+
 (defn node->map [node-el context]
   (if (string? node-el)
     node-el
@@ -159,6 +167,10 @@
            (merge node-map (list-node->map node-el context))
         (= :list-item node-tag)
            (merge node-map (list-item-node->map node-el context))
+        (= :i node-tag)
+           (merge node-map (italics-node->map node-el context))
+        (= :b node-tag)
+           (merge node-map (bold-node->map node-el context))
         :else
           (assoc node-map
             :content (get-node-content node-el context))))))
@@ -173,10 +185,10 @@
       (set/union tagdef/block-tags tagdef/inline-tags)
     (contains? tagdef/block-tags node-tag)
       tagdef/inline-tags
-    (contains? #{:cite :term :notation :def :f} node-tag)
+    (contains? #{:cite :term :notation :def :f :b :i} node-tag)
       #{}
     (= :text node-tag)
-      #{:cite :term :notation :def :f}
+      #{:cite :term :notation :def :f :b :i}
     (= :list node-tag)
       #{:item}
     (= :item node-tag)
