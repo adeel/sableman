@@ -23,10 +23,10 @@
   \par
   %\vfil
   <(when (bun-meta :author) ">
-  \begin{center}
-    \emph{by } \normalfont\@author\par
-    %\ \\ \normalfont\@date\par
-  \end{center}
+  %\begin{center}
+  %  \emph{by } \normalfont\@author\par
+  %  %\ \\ \normalfont\@date\par
+  %\end{center}
   <")>
   %\vfil
   %\vfil
@@ -61,8 +61,8 @@
 <(raw (doc :tex))>
 <") docs)>
 
+{\small
 \section*{References}
-
 <(when (bun-meta :ext-refs) ">
 \begin{description}[leftmargin=3cm,style=nextline]
 <(map-indexed
@@ -70,6 +70,17 @@
 \item[<(raw ref-id)>] <(raw (ref :author))>. \emph{<(raw (ref :title))>}.
 <") (bun-meta :ext-refs))>
 \end{description}
+<")>
+}
+
+<(when (bun-meta :author) ">
+\vspace{1.2em}
+{\small
+\noindent
+<(raw (bun-meta :name))> v<(raw (bun-meta :version))>\\
+\emph{Author:} <(raw (bun-meta :author))>\\
+\emph{Date:} \today
+}
 <")>
 
 \end{document}
