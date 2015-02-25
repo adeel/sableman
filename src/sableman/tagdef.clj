@@ -11,7 +11,8 @@
     :lemma
     :corollary
     :example
-    :remark})
+    :remark
+    :text})
 
 (def block-tags
   #{:statement
