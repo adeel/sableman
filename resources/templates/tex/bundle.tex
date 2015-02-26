@@ -47,11 +47,13 @@
 \paragraph{Abstract.}
 <(raw (bun-meta :description))>
 
+<(when intro ">
 \section*{<(raw (intro :title))>}
 
 <(raw (intro :description))>
 
 <(raw (intro :tex))>
+<")>
 
 <(map (fn [doc] ">
 \section{<(raw (doc :title))>}

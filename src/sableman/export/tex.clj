@@ -119,8 +119,9 @@
         bun-meta     (bmet/load-ext-refs bun-path bun-meta)
         missing-deps (filter (fn [[k v]] (not (v :path)))
                              (bun-meta :deps-map))
-        intro        (when (bp/intro-exists? bun-path)
-                       (export-intro-to-tex bun-meta))
+        intro        (if (bp/intro-exists? bun-path)
+                       (export-intro-to-tex bun-meta)
+                       {:title "" :description "" :tex ""})
         docs         (map-indexed
                       (fn [i doc-name]
                         (export-document-to-tex doc-name (inc i) bun-meta))
